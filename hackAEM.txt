@@ -1,0 +1,10 @@
+Find AEM:- 
+https://github.com/0ang3el/aem-hacker
+python3 aem_discoverer.py --file urls.txt
+scan dir:-
+https://github.com/Raz0r/aemscan
+aemscan aem_url
+wordlist:-
+https://github.com/emadshanab/Adobe-Experience-Manager
+nuclei  tags  
+nuclei -l hosts -tags AEM -t /root/nuclei-templates
