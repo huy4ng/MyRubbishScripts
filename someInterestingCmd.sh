@@ -24,3 +24,6 @@ findomain -t example.com -q |  waybackurls |gf lfi | qsreplace FUZZ | while read
 
 # 利用Idea 自带的 Jar 反编译工具
 java -Xmx7066M -cp "/Applications/IntelliJ IDEA.app/Contents/plugins/java-decompiler/lib/java-decompiler.jar" org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler -mpm=3 ./lib/openam* ./lib-decompiled
+
+# httpx fuzz
+httpx -l hosts -paths dir.txt -threads 100 -random-agent -x GET,POST  -tech-detect -status-code  -follow-redirects -title -http-proxy http://127.0.0.1:8080
