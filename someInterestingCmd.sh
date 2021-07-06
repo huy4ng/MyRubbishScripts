@@ -27,3 +27,6 @@ java -Xmx7066M -cp "/Applications/IntelliJ IDEA.app/Contents/plugins/java-decomp
 
 # httpx fuzz
 httpx -l hosts -paths dir.txt -threads 100 -random-agent -x GET,POST  -tech-detect -status-code  -follow-redirects -title -http-proxy http://127.0.0.1:8080
+
+# nmap fast scan
+nmap -sS -T4 -A -p- -iL live_subdomains.txt --min-rate 1000 --max-retries 3
