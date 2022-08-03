@@ -30,3 +30,6 @@ httpx -l hosts -paths dir.txt -threads 100 -random-agent -x GET,POST  -tech-dete
 
 # nmap fast scan
 nmap -sS -T4 -A -p- -iL live_subdomains.txt --min-rate 1000 --max-retries 3
+
+# use subfinder anew naabu httpx nuclei
+while true; do subfinder -dL domains.txt -all | anew subs.txt | naabu -silent -p - | httpx -silent | nuclei -t nuclei-templates/ | notify ; sleep 3600; done
